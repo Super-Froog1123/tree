@@ -19,12 +19,76 @@
   <link rel="stylesheet" type="text/css" href="css/longpng.css" />
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <style>
+    /* === 全屏新闻风视频头 === */
+    .video-header {
+      position: relative;
+      width: 100%;
+      height: 100vh;         /* ✔ 真正全屏 */
+      overflow: hidden;
+      margin-bottom: 0;      /* 建议去掉额外空隙，视频贴顶更好看 */
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;     /* ✔ 覆盖全屏区域 */
+      filter: brightness(75%);
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    /* 淡入效果 */
+    .bg-video.loaded {
+      opacity: 1;
+    }
+    
+
+    /* 标题文字 */
+    .video-title {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      color: white;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+    }
+
+    .video-title h1 {
+      font-size: 3em;        /* 更大，适合全屏 */
+      margin: 0;
+      font-weight: 900;
+    }
+
+    .video-title h2 {
+      font-size: 1.5em;
+      margin-top: 10px;
+      opacity: 0.9;
+    }
+
+  </style>
 </head>
 
 <body>
+  
+    <!-- 🔥 新闻风视频开头 -->
+  <div class="video-header">
+    <video autoplay muted loop playsinline class="bg-video">
+      <source src="video/C0343.mp4" type="video/mp4">
+      <!-- 可替换成你的影片 -->
+    </video>
+
+    <div class="video-overlay"></div>
+  </div>
+
   <main>
     <article>
       <section class="intro no-cover" style="margin-bottom: 150px;">
+
+        <br><br>
 
         <div class="cover">
           <img src="test4.jpeg" style="width: 100%; height: 100%; object-fit: cover; object-position: center;"
@@ -368,6 +432,8 @@
       </section>
 
     </article>
+
+    
   </main>
 
 
@@ -378,6 +444,50 @@
   <script src="js/scrollTest2.js"></script>
   <script src="js/control.js"></script>
 
+  <script>
+    const video = document.querySelector('.bg-video');
+    video.addEventListener('loadeddata', () => {
+      video.classList.add('loaded');
+    });
+  </script>
+
+  <script>
+  const main = document.querySelector("main");
+  const videoHeader = document.querySelector(".video-header");
+
+  // --- 当 main 顶部进入视窗时 → 跳到 main ---
+  const toMain = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        // main 出现 → 跳到 main
+        if (entry.isIntersecting) {
+          main.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    },
+    {
+      threshold: 0.01  // 只要 main 顶部露出 1%
+    }
+  );
+  toMain.observe(main);
+
+
+  // --- 当 videoHeader 顶部进入视窗时 → 跳回视频 ---
+  const toVideo = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        // video 出现（往上滚） → 回到视频顶部
+        if (entry.isIntersecting) {
+          videoHeader.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    },
+    {
+      threshold: 0.01  // 只要视频顶部露出 1%
+    }
+  );
+  toVideo.observe(videoHeader);
+</script>
 
 </body>
 
