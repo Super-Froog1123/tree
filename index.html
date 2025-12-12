@@ -42,21 +42,6 @@
       transition: opacity 1.5s ease;
     }
 
-    /* 淡入效果 */
-    .bg-video.loaded {
-      opacity: 1;
-    }
-    
-
-    /* 标题文字 */
-    .video-title {
-      position: absolute;
-      bottom: 40px;
-      left: 40px;
-      color: white;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.6);
-    }
-
     .video-title h1 {
       font-size: 3em;        /* 更大，适合全屏 */
       margin: 0;
@@ -75,7 +60,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      z-index: -1;
+      z-index: 1;
     }
 
     .youtube-bg iframe {
@@ -83,28 +68,45 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none; /* 防止点击到视频 */
       border: none;
     }
-
 
   </style>
 </head>
 
 <body>
-  
-    <!-- 🔥 新闻风视频开头 -->
   <div class="video-header">
     <div class="youtube-bg">
       <iframe
-        src="https://www.youtube.com/embed/spYwl7CSepg?autoplay=1&mute=1&controls=0&loop=1&playlist=spYwl7CSepg&playsinline=1&modestbranding=1&showinfo=0&rel=0"
-        frameborder="0"
+        id="ytPlayer"
+        src="https://www.youtube-nocookie.com/embed/TFba5S6Z8tU
+          ?enablejsapi=1
+          &playsinline=1
+          &controls=0
+          &mute=1
+          &loop=1
+          &playlist=TFba5S6Z8tU"
         allow="autoplay; encrypted-media"
-        allowfullscreen
-      ></iframe>
+        frameborder="0">
+      </iframe>
     </div>
 
-    <div class="video-overlay"></div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+      let player;
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('ytPlayer');
+      }
+
+      document.addEventListener('click', () => {
+        if (player) {
+          player.unMute();
+          player.setVolume(100);
+        }
+      });
+    </script>
   </div>
 
 
@@ -125,7 +127,7 @@
 
         <div class="author" style="margin-top: 50px;">
           <h2>
-            梁浩扬 李奕君 胡永健
+            梁浩揚 李奕君 胡永健
           </h2>
         </div>
 
@@ -135,22 +137,34 @@
 
         <section class="text" style="margin-bottom: 50px;">
 
-          <img src="img/img1.jpeg" alt="Hong Kong Trees" style="width: 100%; margin-bottom: 20px;">
-
           <p>
-            每逢台風季，總有相似的新聞畫面在香港上演：街樹連根倒下，石牆樹「連牆帶樹」塌下來，行車線封閉、巴士改道，有時甚至有人受傷。
+            九月的風未到，樹先「郁」。
           </p>
 
           <p>
-             我們每天在樹下等車、行山、經過石牆樹投下的陰影，但對這些「鄰居」的了解，其實非常有限：香港有哪些樹？誰在負責？為什麼有些樹特別容易倒？既然有風險，我們的城市還需不需要樹？
+             中環放工潮，行人路像一條急促的傳送帶。黑西裝、背囊、拖行李箱的人群一波波湧向港鐵入口。街角那排老樹卻不趕時間，樹冠在高樓間的風道裡輕輕擺動，葉片互相摩擦，發出細碎的沙沙聲。你可能只覺得「涼咗少少」，但對樹藝師劉文忠（Lau Noel）而言，這種「未打風已起勢」的晃動，是一種提醒：風季要開始了。
           </p>
 
           <p>
-            這是一個關於「香港樹木系統」的故事：從地景分布、管理權責，到風險來源與城市價值，一層層拆給你看。
+            香港人對「倒樹」的記憶，最深刻的一幕停在 2018 年「山竹」——風暴期間，全港錄得逾 60,000 宗倒樹報告，至今仍是有紀錄以來最多。到了 2025 年 9 月，超強颱風「樺加沙」再次將這段記憶具體化：天文台掛出十號颶風信號，全港多區相繼出現連根拔起或折斷的大樹；政府於當日傍晚已接獲超過 1,200 宗塌樹報告，遍佈筲箕灣、沙田、荃灣、黃大仙等地，不少樹木橫臥道路、壓毀設施，阻塞交通。
           </p>
 
           <p>
-            如果要用一個數字去感受「樹木風險」有幾現實，可以回到 2018 年的超強颱風「山竹」：香港天文台事後總結，風暴期間全港錄得超過 60,000 宗倒樹報告，是有紀錄以來最高的一次。 這個數字，為之後的討論定下了一個很具體的背景。
+            其中，愛民邨一棵逾半世紀歷史的印度榕在狂風中傾倒，這棵承載社區情感的老樹倒下，引起居民惋惜；九龍公園亦有古樹被吹至倒伏，其後在政府與社區協力下方能扶正。這些案例與數字像一把尺，把「樹木風險」從抽象拉回現實——它不是「可能」，而是「發生過」，而且一次就可以是城市級別。
+          </p>
+
+          <p>
+            「傾斜的樹令人覺得不自然，行近些會見到泥土被撬起、樹根外露；向地下的樹幹在 compression side 會爆皮。枝條破損，也能證明樹木剛受過強風。」
+          </p>
+
+          <p>
+            然而對樹藝師劉文忠來說，不能只心痛於結果。作為照看香港樹木的一員，他們要在風後第一時間走到現場，理解大樹為何倒下。他解釋：「颱風後，樹藝師要第一時間去觀察樹木的狀況，在現場分析倒下的原因——是否受風位置、是否地理問題、樹冠是否不平衡、品種結構有沒有弱點。兩星期內出現兩個颱風（樺加沙和麥德姆），破壞力會疊加：第一次把樹木根部同泥土鬆開，第二次更多根部折斷，重心偏移會更大。」
+          </p>
+
+          <img src="img/Lau.png" style="width: 40%; margin-bottom: 20px;">
+
+          <p>
+            劉文忠做樹二十年，2005 年入行，2008 年考牌，屬於本港「頭幾屆」持政府樹藝師資格的一批專業人士。他估計全港持牌樹藝師約三千人，而他同時亦是香港樹木學會及綠地廣場網站的創立者之一， 2003 年畢業於香港大學環境研究專業，其後他成為自僱樹木顧問，並在 Facebook 管理擁有超過 4,300 名成員的「樹藝班同學會」，繼續在社群中分享專業。
           </p>
         </section>
 
@@ -167,6 +181,10 @@
           <p>
             從地圖上看，香港並不是一個典型的「大都會」。全港約四成土地屬於郊野公園和特別地區，加上其他鄉郊用地，超過一半以上的土地其實是山林、農地或未發展地。密密麻麻的高樓，只擠在相對狹小的市區範圍內，形成「自然山區 + 高密度城市」並存的獨特格局。
           </p>
+
+          <img src="img/map2.png" alt="" style="width: 100%; margin-bottom: 20px;">
+
+          <img src="img/pie.png" alt="" style="width: 100%; margin-bottom: 20px;">
 
           <p>
             在這個格局之下，香港的樹大致分為兩大類。
@@ -188,7 +206,7 @@
             最具香港特色的，是石牆樹——樹根從石砌擋土牆縫隙垂下，與百年老牆纏繞成一幅幅獨有的綠色景觀。早年的調查顯示，全港曾有逾千棵石牆樹，絕大多數都是榕樹，特別是細葉榕。它們既是城市記憶的一部分，也是風險管理最棘手的一群樹。
           </p>
 
-          <iframe src="https://www.google.com/maps/d/embed?mid=1uIUqATuYjfoqs2n-PBABbohJ2UnmwHI&ehbc=2E312F" width="640" height="480"></iframe>
+          <!-- <iframe src="https://www.google.com/maps/d/embed?mid=1uIUqATuYjfoqs2n-PBABbohJ2UnmwHI&ehbc=2E312F" width="640" height="480"></iframe> -->
 
         </section>
 
@@ -208,11 +226,23 @@
 
           <br><br>
 
+          <img src="img/word_map.png" alt="" style="width: 100%; margin-bottom: 20px;">
+
           <img src="img/img2.jpeg" alt="" style="width: 100%; margin-bottom: 20px;">
 
           <p>
-            香港樹木管理的一個核心現實是：「誰管那塊地，就誰管那棵樹」。
+            康文署於十二月九日派員到大圍香粉寮街美致樓對出位置，修剪轄下管理的樹木枯枝。現在人員郭小姐稱是項目為處理颱風樺加沙後的樹木工程。
           </p>
+
+          <p>
+            「一般先處理狀況危急的樹木，之後才到修整其他未受太大波及的樹木... 全沙田有一萬多棵樹，好難短時間做好全部維修」郭小姐道。
+          </p>
+
+          <p>
+            翻查2022年的立法會記錄，路政署與康文署為當時管理最多樹木數量的政府部門，當中康文署有263名具樹藝專業資格的管理人員，而路政署只有49名，平均每名路政署管理人員需管轄近一萬二千棵市區樹木。
+          </p>
+
+          <img src="img/manager.jpg" alt="" style="width: 100%; margin-bottom: 20px;">
 
           <p>
             路邊行車道旁的樹，多由路政署或土木工程拓展署負責；行人道、社區公園、小型休憩處，則通常是康文署的地頭；公屋範圍的樹屬房屋署；郊野公園和自然保育區的樹由漁農自然護理署照看；政府建築物四周的樹則是建築署或政府物業署的責任。
@@ -241,29 +271,12 @@
 
           <div class="flourish-embed flourish-hierarchy" data-src="visualisation/26050708"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/26050708/thumbnail" width="100%" alt="hierarchy visualization" /></noscript></div>
 
-          <p>
-            其實這種制度上的複雜，市民感受得很直接：
-          </p>
-          
-          <audio id="audio" src="audio/美人2.m4a" preload="auto"></audio>
-
-          <button id="playBtn">▶ 点击播放</button>
-
-          <script>
-            const audio = document.getElementById('audio');
-            const btn = document.getElementById('playBtn');
-
-            btn.addEventListener('click', () => {
-              audio.play();
-            });
-          </script>
-
         </section>
 
         <section class="text" style="margin-bottom: 50px;">
 
           <h2>
-            真正危險的，不是品種，而是環境與管理
+            「哪種樹最危險？」
           </h2>
 
           <br><br>
@@ -283,11 +296,15 @@
           </p>
 
           <p>
+            劉文忠談到「評分」時說得直接。有些樹看似被剪到「剩一枝」，真正問題其實是樹幹仍在腐爛、有洞。「我不是說它剩下一枝，而是它的樹幹還在爛，所以我會評分低一點。」修剪如果只是為遷就設施、求快、求「整齊」，往往會把樹剪成更脆弱的形狀。
+          </p>
+
+          <p>
             第三種，是內部腐朽的老樹。樹幹底部的裂縫、深樹洞、白蟻泥路、長在樹幹上的菇類和木層菌，往往是內部結構受損的警號。這些樹外表仍然枝葉繁茂，但裡面可能已經空心或承托力大降。近年政府開始使用聲波斷層儀、阻力鑽等工具檢測樹幹內部，不靠肉眼「估」，但受資源和人手所限，不可能對每棵街樹都做高成本檢查。
           </p>
 
           <p>
-            第四種，是石牆樹。石牆樹迷人之處，恰恰也是風險所在：樹根與百年石砌牆體糾纏在一起，牆後的土壤、排水、根系和石塊之間形成一個「命運共同體」。一旦背後土壤流失、牆體老化或基礎受損，倒塌往往不是「樹斷」，而是「牆樹齊倒」。幾宗石牆樹事故之後，政府雖然訂立專門指引，對個別高風險石牆樹減冠、加支撐或移除，但如何在「文化景觀」與「安全」之間取捨，仍是公眾充滿感情和爭議的議題。
+            石牆樹：香港最迷人的景觀之一，也是最棘手的「命運共同體」石牆樹的魅力在於「樹與牆共生」，風險也在於此。牆體、排水、背後土壤與根系互相牽連，一出事常常是「牆樹齊倒」。早年研究引述調查，香港曾記錄「505 幅牆上有 1,275 棵樹」的規模，以榕屬最常見。政府亦在 2010 年起設立樹木登記冊，涵蓋古樹名木及石牆樹等資料，讓公眾可查閱。
           </p>
 
           <div style="position: relative; width: 100%; height: 0; padding-top: 125.0000%;
@@ -298,16 +315,12 @@
           </iframe>
           </div>
 
-          <p>
-            如果拉闊時間來看，樹倒塌並非罕見的單一事件。在超強颱風「山竹」襲港的那一年，全港錄得的倒樹報告高達數以萬計；而在風勢較平靜的年份，平日加上風暴日子，每年也有數百宗倒樹或枝折個案，涉及交通阻塞、私家車被壓毀以及不同程度的人身傷害。這些數字提醒我們：樹木風險不是「聽說」，而是實實在在存在於日常生活之中。
-          </p>
-
         </section>
 
         <section class="text" style="margin-bottom: 50px;">
 
           <h2 style="font-size: 1.6em; font-weight: bold;">
-            有風險，為什麼還要種樹？
+            樹的價值，很多時候先從「心情」開始
           </h2>
 
           <br><br>
@@ -330,6 +343,18 @@
             在中環返工幾年的 Kit，就用自己每日放工的路，講咗一個好直觀的比較：
           </p>
 
+          <p>
+            「我每日放工行去地鐵站，我都好清楚 feel 到，條街有冇樹，心情真係差好遠……啲純石屎街道，熱到好想即刻衝入商場……但一去到有大樹、有少少綠色嗰段路……個人冇咁燥，甚至會肯慢慢行。」
+          </p>
+
+          <p>
+             「我唔希望社會因為驚，就揀最簡單嗰條路，全部砍低……可唔可以種喺啱嘅位置、預留多啲空間、有人好好咁管理？」
+          </p>
+
+          <p>
+            Kit 說的「焗」不是錯覺。針對高密度城市的研究指出，城市綠化與樹蔭能改善行人層熱環境。以香港經驗為例，有研究估算，若要把行人層氣溫降低約 1°C，所需綠化規模可達城市面積的相當比例（細節依模型而異，但方向一致）。樹蔭不是裝飾，而是一種「降溫基建」。
+          </p>
+
           <audio id="audio2" src="audio/美人.m4a" preload="auto"></audio>
 
           <button id="playBtn2">▶ 点击播放</button>
@@ -344,8 +369,29 @@
           </script>
 
           <p>
-            從經濟角度看，樹木也是資產。世界各地不少城市在重建市中心時，都把「有樹蔭的可步行街道」視為核心賣點。行人停留時間長了，人流願意慢下來，街舖和餐廳才有生意。優質街道綠化往往和較高的物業價值、較具吸引力的商業環境聯繫在一起。
+            「每次打完風見到成街都係倒樹，心入面都會驚下……你話邊個部門管邊棵樹，我真係完全分唔到，淨係知打去 1823，之後就『部門互相轉介』……」
           </p>
+
+          <p>
+             「我又唔想全部樹都被人一刀砍晒，但係安全又真係好重要，所以我都幾希望政府可以講清楚啲……等我哋心入面有個底囉。」
+          </p>
+
+          <p>
+            兩段聲音放在一起，就構成香港樹木爭議最真實的底色。想要綠蔭，也想要安全；想要清晰交代，也不想被一句「跟進中」打發。
+          </p>
+
+          <audio id="audio" src="audio/美人2.m4a" preload="auto"></audio>
+
+          <button id="playBtn">▶ 点击播放</button>
+
+          <script>
+            const audio = document.getElementById('audio');
+            const btn = document.getElementById('playBtn');
+
+            btn.addEventListener('click', () => {
+              audio.play();
+            });
+          </script>
 
           <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
           padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
@@ -368,15 +414,35 @@
           <img src="img/img6.jpeg" alt="" style="width: 100%; margin-bottom: 20px;">
 
           <p>
-            香港面對的難題，不是簡單的「樹太多」，而往往是：在錯的地方，用錯的方法種了樹。
+            劉文忠談到「先導計劃」時，提到一種很香港式的「公平」。他認為若用評分制度挑出高風險樹做試點，不應只靠外區人「講風涼話」，而要看該區居民如何看待風險與樹的感情。他說，你住在那一區，受害者是你，你覺得 OK 就 OK。逐區做，其實可以逐區拿到反應。
           </p>
 
           <p>
-            從狹窄的樹坑、被石屎封死的樹根、為遷就工程而犧牲樹的健康、為求省時而粗暴修剪──這些選擇，把原本可以長壽穩定的樹，變成每逢台風必上新聞的「風險個案」。
+            而在最實際的層面，他的答案仍回到「right tree right place」。在繁忙街道、人流密集的地方，不是「唔可以有樹」，而是「要種可管理得到的樹」。例如寧願種 15 米左右、可巡查可修剪的中型樹，也不要硬塞 20、30 米的大樹到沒有生長空間的位置。這裡的重點，已經不只是樹木技術，而是城市哲學。
           </p>
 
           <p>
-            真正要追求的，不是把所有大樹砍光，而是重新設計我們與樹的關係：在規劃階段預留足夠的根部生長空間；在選擇樹種時避免單一品種壟斷；在日常管理上投資足夠的專業人手和檢測工具；在出現風險個案時公開透明地解釋評估和取捨理由。
+            我們願意為一條有樹蔭、可步行、讓人放慢腳步的街，付出多少成本？那可能是更多土壤空間、更多前期規劃、更多專業人手、更多儀器檢測、更多公開解釋與溝通。
+          </p>
+
+          <p>
+             也可能是每逢風季來臨，就用最省事的方式，把問題一次過「清空」。
+          </p>
+
+          <p>
+            山竹的六萬宗倒樹報告提醒我們，風險是真實的。
+          </p>
+
+          <p>
+            1823 每年平均約 2.4 萬宗樹木投訴、當中仍有責任爭議拖延，也提醒我們，制度的摩擦同樣真實。
+          </p>
+
+          <p>
+            但同時，Kit 的一句「條街有冇樹，心情真係差好遠」提醒我們，樹的價值也是真實的。它不只是一棵植物，而是城市裡少數仍能提供陰影、空氣、喘息位的公共資源。在這個山多樓多、風也多的香港，樹從來不是背景。
+          </p>
+
+          <p>
+            有沒有樹、怎樣種樹、出了事怎樣交代，說的其實是我們想住在一個怎樣的城市。
           </p>
 
           <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
@@ -386,70 +452,8 @@
           src="https://www.canva.com/design/DAG5yl17nvg/XUkBIk2W0ceJhO3scZXS7g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
           </iframe>
           </div>
-
-          <p>
-            當市民懂得識別基本風險徵兆、懂得區分「為安全而必要移除」與「為工程方便而濫砍」，當部門之間可以真正協調而非互相「踢波」，城市才能在安全與綠蔭之間找到一個更成熟的平衡點。
-          </p>
-
-          <p>
-            畢竟，在這個山多樓多、風也多的城市裡，樹從來不是單純的背景。有沒有樹、怎樣種樹，說的其實是我們想住在一個怎樣的香港。
-          </p>
           
         </section>
-
-        <!-- <section class="text" style="margin-bottom: 50px;">
-
-          <h2 style="font-size: 1.6em; font-weight: bold;">
-            参考资料
-          </h2>
-
-          <br><br>
-
-          <p>
-            <a href="https://www.expo2025.or.jp.c.att.hp.transer.com/news/news-20250509-05/" target="_blank">1. 大阪世界博览会官方网站：世博会支付方式</a>
-          </p>
-
-          <p>
-            <a href="https://data.worldbank.org.cn/indicator/SP.POP.65UP.TO.ZS" target="_blank">2. 世界银行：65岁及以上人口（占总人口百分比, 2024）</a>
-          </p>
-
-          <p>
-            <a href="https://www.stat.go.jp/data/jinsui/new.html" target="_blank">3. 日本统计局：日本人口统计</a>
-          </p>
-
-          <p>
-            <a href="https://www.kojinbango-card.go.jp/zh-cn-faq/" target="_blank">4. 日本地方公共团体信息系统机构（J-LIS）：个人编号卡持有人比例</a>
-          </p>
-
-          <p>
-            <a href="https://www.j-credit.or.jp/information/statistics/" target="_blank">5. 日本消费信贷协会：2022-2024 日本信用卡诈骗损失</a>
-          </p>
-
-          <p>
-            <a href="https://statistics.jnto.go.jp/en/" target="_blank">6. 日本观光厅统计：中国赴日游客数量、2025年6月各国游客占比</a>
-          </p>
-
-          <p>
-            <a href="https://mmdlabo.jp/investigation/detail_2325.html" target="_blank">7. 日本MMD研究所：最受欢迎的二维码支付方式</a>
-          </p>
-
-          <p>
-            <a href="https://www.meti.go.jp/press/2024/03/20250331005/20250331005.html" target="_blank">8. 日本经济产业省：无现金支付金额与比例变化趋势（2024）</a>
-          </p>
-
-          <p>
-            <a href="https://www.statista.com/" target="_blank">9. Statista调查报告：日本消费者选择数字支付的原因分析</a>
-          </p>
-
-          <p>
-            <a href="https://www.mfa.gov.cn/wjbzhd/202503/t20250322_11580261.shtml?utm_source=chatgpt.com" target="_blank">10. 外交部：中日举行第六次经济高层对话</a>
-          </p>
-
-          <p>
-            <a href="https://paper.people.com.cn/rmrb/pc/content/202503/23/content_30063593.html?utm_source=chatgpt.com" target="_blank">11. 人民日报：第十一次中日韩外长会在东京举行</a>
-          </p>
-
-        </section> -->
 
         <div style="height:120px;"></div>
 
